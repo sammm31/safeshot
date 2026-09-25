@@ -71,11 +71,13 @@ export const WireIllustration: React.FC = () => {
       {/* Telemetry Badge */}
       <View style={styles.telemetryBadge}>
         <View style={styles.pulseDot} />
-        <Text style={styles.telemetryText}>SYNTHETIC CV: CIRCLE + SQUARE GEOMETRY</Text>
+        <Text style={styles.telemetryText}>SAFE SHOT CV: CIRCLE + SQUARE GEOMETRY</Text>
       </View>
     </View>
   );
 };
+
+export const InspectionIllustration = WireIllustration;
 
 const styles = StyleSheet.create({
   container: {

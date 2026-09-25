@@ -10,12 +10,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../../theme/colors';
 import { borderRadius, spacing } from '../../theme/spacing';
 import { typography } from '../../theme/typography';
-import { WireInspectionResult } from '../../types/inspection';
+import { InspectionResult, WireInspectionResult } from '../../types/inspection';
 import { formatDateTime, getStatusTheme } from '../../utils/formatters';
 import { Badge } from '../common/Badge';
 
 export interface InspectionCardProps {
-  inspection: WireInspectionResult;
+  inspection: InspectionResult;
   onPress: () => void;
 }
 
@@ -32,7 +32,7 @@ export const InspectionCard: React.FC<InspectionCardProps> = ({
       onPress={onPress}
       style={styles.card}
     >
-      {/* Wire Thumbnail with status glow border */}
+      {/* Specimen Thumbnail with status glow border */}
       <View style={[styles.thumbnailContainer, { borderColor: statusTheme.borderColor }]}>
         {imageUri ? (
           <Image
@@ -56,8 +56,8 @@ export const InspectionCard: React.FC<InspectionCardProps> = ({
           </Text>
         </View>
 
-        <Text style={styles.wireTypeText} numberOfLines={1}>
-          {details.wireType || 'Electrical Specimen'}
+        <Text style={styles.specimenTypeText} numberOfLines={1}>
+          {details.specimenType || details.wireType || 'Inspection Specimen'}
         </Text>
 
         <View style={styles.metaRow}>
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '700',
   },
-  wireTypeText: {
+  specimenTypeText: {
     ...typography.body,
     fontWeight: '600',
     color: colors.textPrimary,

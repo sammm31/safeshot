@@ -40,8 +40,8 @@ export const ResultScreen: React.FC = () => {
   const handleShareReport = async () => {
     try {
       await Share.share({
-        title: `WireCheck Inspection: ${inspection.status}`,
-        message: `WireCheck Report [${inspection.id}]\nStatus: ${inspection.status}\nConfidence: ${inspection.confidence.toFixed(1)}%\nTimestamp: ${formatDateTime(inspection.timestamp)}\nNotes: ${inspection.message}\n(Demo result — ML analysis will be connected later)`,
+        title: `Safe Shot Inspection: ${inspection.status}`,
+        message: `Safe Shot Report [${inspection.id}]\nStatus: ${inspection.status}\nConfidence: ${inspection.confidence.toFixed(1)}%\nTimestamp: ${formatDateTime(inspection.timestamp)}\nNotes: ${inspection.message}\n(Demo result — ML analysis will be connected later)`,
       });
     } catch (err) {
       console.warn('Share error:', err);
@@ -102,7 +102,7 @@ export const ResultScreen: React.FC = () => {
         {/* Action Buttons */}
         <View style={styles.actionSection}>
           <Button
-            title="Inspect Another Wire"
+            title="Inspect Another Specimen"
             variant="primary"
             size="lg"
             fullWidth

@@ -1,7 +1,7 @@
-import { WireInspectionResult, WireStatus } from '../types/inspection';
+import { InspectionResult, InspectionStatus } from '../types/inspection';
 
 /**
- * WireCheck Computer Vision Inspection Service (Mock Implementation)
+ * Safe Shot Computer Vision Inspection Service (Mock Implementation)
  * 
  * Synthetic Visual Model Rule:
  * 1. Geometry: Outer Circle (inspection zone) with centered Inner Square.
@@ -10,7 +10,7 @@ import { WireInspectionResult, WireStatus } from '../types/inspection';
  *    - BORDERLINE: Inner square has approximately the SAME brightness/color as outer circle (L_inner ≈ L_outer).
  *    - DAMAGED: Inner square is the SAME or DARKER than outer circle (L_inner <= L_outer).
  */
-export async function analyzeWire(imageUri: string): Promise<WireInspectionResult> {
+export async function analyzeSpecimen(imageUri: string): Promise<InspectionResult> {
   // Simulate CV inference processing latency (1.4 - 1.8 seconds)
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
@@ -18,7 +18,7 @@ export async function analyzeWire(imageUri: string): Promise<WireInspectionResul
 
   let outerLum = 45;
   let innerLum = 45;
-  let status: WireStatus = 'BORDERLINE';
+  let status: InspectionStatus = 'BORDERLINE';
   let confidence = 88.5;
 
   // 1. Check for embedded synthetic dataset tags
@@ -30,7 +30,7 @@ export async function analyzeWire(imageUri: string): Promise<WireInspectionResul
     outerLum = parseInt(outerMatch[1], 10);
     innerLum = parseInt(innerMatch[1], 10);
   } else if (conditionMatch) {
-    const cond = conditionMatch[1].toUpperCase() as WireStatus;
+    const cond = conditionMatch[1].toUpperCase() as InspectionStatus;
     if (cond === 'SAFE') {
       outerLum = 24;
       innerLum = 96;
@@ -96,7 +96,7 @@ export async function analyzeWire(imageUri: string): Promise<WireInspectionResul
     message = 'Inner square has approximately the same brightness/color as the outer circle.';
     defectDetected = `Low contrast boundary (equi-luminance delta: ${delta >= 0 ? '+' : ''}${delta}%)`;
     insulationIntegrity = `Outer Circle: L=${outerLum}% | Inner Square: L=${innerLum}% (Equi-luminance)`;
-    recommendation = 'Luminance contrast is within ambiguity band. Further calibration or secondary inspection required.';
+    recommendation = 'Luminance contrast is within ambiguity band. Secondary verification recommended.';
     metricScore = 65;
   }
   // DAMAGED/UNSAFE: inner square is the SAME or DARKER than the outer circle
@@ -106,12 +106,12 @@ export async function analyzeWire(imageUri: string): Promise<WireInspectionResul
     message = 'Inner square is darker than the outer circle. Anomaly detected (DAMAGED).';
     defectDetected = `Inverted contrast deficit (Delta: ${delta}%, L_inner <= L_outer)`;
     insulationIntegrity = `Outer Circle: L=${outerLum}% | Inner Square: L=${innerLum}% (Negative gradient)`;
-    recommendation = 'Deficit threshold exceeded: Core square failed brightness check. Decommission specimen.';
+    recommendation = 'Deficit threshold exceeded: Core square failed brightness check. Specimen marked unsafe.';
     metricScore = 22;
   }
 
   confidence = Math.min(99.4, Math.max(82.0, parseFloat(confidence.toFixed(1))));
-  const id = `SYN-${Date.now().toString(36).toUpperCase()}-${Math.floor(100 + Math.random() * 900)}`;
+  const id = `SSH-${Date.now().toString(36).toUpperCase()}-${Math.floor(100 + Math.random() * 900)}`;
 
   return {
     id,
@@ -121,6 +121,7 @@ export async function analyzeWire(imageUri: string): Promise<WireInspectionResul
     message,
     timestamp: new Date().toISOString(),
     details: {
+      specimenType: 'Synthetic Circle-Square Specimen',
       wireType: 'Synthetic Circle-Square Specimen',
       insulationIntegrity,
       defectDetected,
@@ -130,6 +131,9 @@ export async function analyzeWire(imageUri: string): Promise<WireInspectionResul
     isDemo: true,
   };
 }
+
+// Backwards compatibility alias
+export const analyzeWire = analyzeSpecimen;
 
 function simpleHash(str: string): number {
   let hash = 0;

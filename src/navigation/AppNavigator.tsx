@@ -52,7 +52,7 @@ function MainTabNavigator() {
         name="CheckWireTab"
         component={CheckWireScreen}
         options={{
-          tabBarLabel: 'Check Wire',
+          tabBarLabel: 'Inspect',
           tabBarIcon: ({ color, focused }) => (
             <View style={styles.centerIconWrapper}>
               <View

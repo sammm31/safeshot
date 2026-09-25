@@ -18,7 +18,7 @@ import { borderRadius, spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
 import { shadows } from '../theme/shadows';
 import { MainTabParamList, RootStackParamList } from '../navigation/types';
-import { WireIllustration } from '../components/wire/WireIllustration';
+import { InspectionIllustration, WireIllustration } from '../components/wire/WireIllustration';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { Badge } from '../components/common/Badge';
@@ -50,10 +50,10 @@ export const HomeScreen: React.FC = () => {
             </View>
             <View>
               <View style={styles.brandTitleRow}>
-                <Text style={styles.brandName}>WireCheck</Text>
+                <Text style={styles.brandName}>Safe Shot</Text>
                 <Badge type="DEMO" label="v1.0" size="sm" style={styles.versionBadge} />
               </View>
-              <Text style={styles.brandSubtitle}>Smart Wire Inspection</Text>
+              <Text style={styles.brandSubtitle}>Smart Safety Inspection</Text>
             </View>
           </View>
 
@@ -62,7 +62,7 @@ export const HomeScreen: React.FC = () => {
             activeOpacity={0.7}
             onPress={() => navigation.navigate('About')}
             style={styles.infoButton}
-            accessibilityLabel="About WireCheck"
+            accessibilityLabel="About Safe Shot"
           >
             <Ionicons name="information-circle-outline" size={22} color={colors.accent} />
           </TouchableOpacity>
@@ -77,18 +77,18 @@ export const HomeScreen: React.FC = () => {
             </View>
           </View>
 
-          <Text style={styles.heroHeadline}>Inspect before you connect.</Text>
+          <Text style={styles.heroHeadline}>Verify before you proceed.</Text>
           <Text style={styles.heroDescription}>
-            Capture a clear image of the wire and let WireCheck analyze its condition.
+            Capture a clear image of the target area and let Safe Shot analyze its condition.
           </Text>
 
-          {/* Technical Wire Diagram Illustration */}
-          <WireIllustration />
+          {/* Technical Diagram Illustration */}
+          <InspectionIllustration />
 
           {/* Actions */}
           <View style={styles.ctaGroup}>
             <Button
-              title="Check a Wire"
+              title="Start Inspection"
               variant="primary"
               size="lg"
               fullWidth
@@ -123,7 +123,7 @@ export const HomeScreen: React.FC = () => {
             </View>
             <View style={styles.stepTextContainer}>
               <Text style={styles.stepTitle}>Capture</Text>
-              <Text style={styles.stepDesc}>Take or select a wire image</Text>
+              <Text style={styles.stepDesc}>Take or select an inspection image</Text>
             </View>
           </View>
 
@@ -134,7 +134,7 @@ export const HomeScreen: React.FC = () => {
             </View>
             <View style={styles.stepTextContainer}>
               <Text style={styles.stepTitle}>Inspect</Text>
-              <Text style={styles.stepDesc}>Analyze the visible condition</Text>
+              <Text style={styles.stepDesc}>Analyze optical condition</Text>
             </View>
           </View>
 
@@ -145,7 +145,7 @@ export const HomeScreen: React.FC = () => {
             </View>
             <View style={styles.stepTextContainer}>
               <Text style={styles.stepTitle}>Result</Text>
-              <Text style={styles.stepDesc}>View the inspection status</Text>
+              <Text style={styles.stepDesc}>View the safety status</Text>
             </View>
           </View>
         </View>

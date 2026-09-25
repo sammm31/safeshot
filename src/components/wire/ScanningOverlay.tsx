@@ -11,9 +11,9 @@ import { typography } from '../../theme/typography';
 
 const STEPS = [
   'Processing image...',
-  'Extracting wire boundaries...',
-  'Analyzing dielectric insulation...',
-  'Computing integrity metrics...',
+  'Extracting specimen boundaries...',
+  'Measuring core region contrast...',
+  'Computing photometric metrics...',
 ];
 
 export const ScanningOverlay: React.FC = () => {
@@ -105,7 +105,7 @@ export const ScanningOverlay: React.FC = () => {
       <View style={styles.statusBox}>
         <View style={styles.pulseRow}>
           <Animated.View style={[styles.statusDot, { opacity: pulseAnim }]} />
-          <Text style={styles.title}>Analyzing wire...</Text>
+          <Text style={styles.title}>Analyzing specimen...</Text>
         </View>
         <Text style={styles.stepText}>{STEPS[stepIndex]}</Text>
         <Text style={styles.subtext}>Processing image with computer vision</Text>

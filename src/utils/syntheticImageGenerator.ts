@@ -1,9 +1,9 @@
-import { WireStatus } from '../types/inspection';
+import { InspectionStatus, WireStatus } from '../types/inspection';
 
 export interface SyntheticSpecimenParams {
   id: string;
   name: string;
-  condition: WireStatus;
+  condition: InspectionStatus;
   outerCircleColor: string;
   outerCircleLuminance: number; // 0 to 100
   innerSquareColor: string;
@@ -29,10 +29,10 @@ export function getLuminance(hex: string): number {
  * 1. Large OUTER CIRCLE (inspection area, centered at 200,200, radius 135)
  * 2. Clearly visible INNER SQUARE (centered at 200,200, size 90x90)
  * 3. Flat simple visual regions with crisp clean boundaries
- * 4. No physical wire textures, no frayed copper, no workbenches
+ * 4. Pure flat synthetic geometry with crisp boundaries
  */
 export function createSyntheticSvgUri(params: {
-  condition: WireStatus;
+  condition: InspectionStatus;
   outerColor: string;
   innerColor: string;
   specimenId?: string;
@@ -55,7 +55,7 @@ export function createSyntheticSvgUri(params: {
   <line x1="15" y1="200" x2="45" y2="200" stroke="%23334155" stroke-width="1.5"/>
   <line x1="355" y1="200" x2="385" y2="200" stroke="%23334155" stroke-width="1.5"/>
 
-  <!-- 1. Large OUTER CIRCLE: Wire Inspection Area -->
+  <!-- 1. Large OUTER CIRCLE: Target Inspection Area -->
   <circle cx="200" cy="200" r="135" fill="${encodeURIComponent(outerColor)}" stroke="%23475569" stroke-width="2"/>
 
   <!-- 2. Clearly Visible INNER SQUARE: Center Region -->

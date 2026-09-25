@@ -3,10 +3,10 @@ import { StyleSheet, Text, View, ViewStyle, TextStyle } from 'react-native';
 import { colors } from '../../theme/colors';
 import { borderRadius, spacing } from '../../theme/spacing';
 import { typography } from '../../theme/typography';
-import { WireStatus } from '../../types/inspection';
+import { InspectionStatus, WireStatus } from '../../types/inspection';
 import { getStatusTheme } from '../../utils/formatters';
 
-export type BadgeType = WireStatus | 'DEMO' | 'INFO' | 'NEUTRAL';
+export type BadgeType = InspectionStatus | 'DEMO' | 'INFO' | 'NEUTRAL';
 
 export interface BadgeProps {
   type?: BadgeType;

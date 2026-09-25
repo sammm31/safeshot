@@ -22,7 +22,7 @@ export const AboutScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
       <Header
-        title="About WireCheck"
+        title="About Safe Shot"
         subtitle="Version 1.0.0 (Demo Build)"
         showBack
         onBack={() => navigation.goBack()}
@@ -41,13 +41,13 @@ export const AboutScreen: React.FC = () => {
               <Ionicons name="flash-outline" size={24} color={colors.cyanVibrant} />
             </View>
             <View>
-              <Text style={styles.heroTitle}>WireCheck</Text>
-              <Text style={styles.heroSub}>Intelligent Conductor Quality Verification</Text>
+              <Text style={styles.heroTitle}>Safe Shot</Text>
+              <Text style={styles.heroSub}>Intelligent Visual Safety Verification</Text>
             </View>
           </View>
 
           <Text style={styles.heroLeadText}>
-            WireCheck is a mobile inspection application designed to assist with wire-condition checking using image analysis.
+            Safe Shot is a mobile inspection application designed to assist with safety-condition checking using image analysis.
           </Text>
         </Card>
 
@@ -58,7 +58,7 @@ export const AboutScreen: React.FC = () => {
             <Text style={styles.disclaimerTitle}>Safety Disclaimer</Text>
           </View>
           <Text style={styles.disclaimerText}>
-            WireCheck is an assistive inspection tool and should not replace professional electrical inspection. Always de-energize and verify zero electrical potential using a calibrated multimeter before handling physical conductors.
+            Safe Shot is an assistive inspection tool and should not replace professional certified inspection. Always observe established safety protocols and regulations before handling physical equipment.
           </Text>
         </View>
 
@@ -156,7 +156,7 @@ export const AboutScreen: React.FC = () => {
 
           <Card variant="elevated" padding="lg" style={styles.infoCard}>
             <Text style={styles.projectText}>
-              WireCheck is an engineering prototype created for electrical technicians, safety auditors, and maintenance teams.
+              Safe Shot is an engineering prototype created for safety auditors, quality inspectors, and verification teams.
             </Text>
 
             <View style={styles.techStackContainer}>

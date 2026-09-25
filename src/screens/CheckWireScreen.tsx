@@ -26,9 +26,9 @@ import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
 import { Header } from '../components/common/Header';
 import { ScanningOverlay } from '../components/wire/ScanningOverlay';
-import { analyzeWire } from '../services/wireCheckService';
+import { analyzeSpecimen } from '../services/wireCheckService';
 import { historyStore } from '../services/historyStore';
-import { SAMPLE_WIRES } from '../utils/sampleWires';
+import { SAMPLE_SPECIMENS } from '../utils/sampleWires';
 import { Badge } from '../components/common/Badge';
 
 type CheckWireNavigationProp = CompositeNavigationProp<
@@ -49,10 +49,10 @@ export const CheckWireScreen: React.FC = () => {
     try {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
-        setPermissionError('Camera permission is required to capture wire images.');
+        setPermissionError('Camera permission is required to capture inspection images.');
         Alert.alert(
           'Camera Permission Required',
-          'WireCheck requires camera access to inspect wires. Please grant camera permission in your system settings.',
+          'Safe Shot requires camera access to capture inspection images. Please grant camera permission in your system settings.',
           [
             { text: 'Cancel', style: 'cancel' },
             {
@@ -93,7 +93,7 @@ export const CheckWireScreen: React.FC = () => {
         setPermissionError('Gallery permission is required to select existing images.');
         Alert.alert(
           'Gallery Access Required',
-          'WireCheck needs access to your photos to choose a wire image for analysis.',
+          'Safe Shot needs access to your photos to choose an image for analysis.',
           [
             { text: 'Cancel', style: 'cancel' },
             {
@@ -131,7 +131,7 @@ export const CheckWireScreen: React.FC = () => {
 
     setIsAnalyzing(true);
     try {
-      const inspectionResult = await analyzeWire(selectedImage);
+      const inspectionResult = await analyzeSpecimen(selectedImage);
       // Persist in history store
       historyStore.add(inspectionResult);
 
@@ -139,7 +139,7 @@ export const CheckWireScreen: React.FC = () => {
       navigation.navigate('Result', { inspection: inspectionResult });
     } catch (err) {
       console.error('Inspection error:', err);
-      Alert.alert('Analysis Failed', 'Unable to complete wire inspection. Please try again.');
+      Alert.alert('Analysis Failed', 'Unable to complete inspection. Please try again.');
     } finally {
       setIsAnalyzing(false);
     }
@@ -152,7 +152,7 @@ export const CheckWireScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
       <Header
-        title="Check a Wire"
+        title="Inspect Specimen"
         subtitle="Capture a clear image for inspection"
         rightAction={
           <Badge type="DEMO" label="AI INFERENCE READY" size="sm" />
@@ -187,7 +187,7 @@ export const CheckWireScreen: React.FC = () => {
                 <Ionicons name="camera" size={36} color={colors.accent} />
               </View>
 
-              <Text style={styles.emptyTitle}>Capture wire image</Text>
+              <Text style={styles.emptyTitle}>Capture inspection image</Text>
               <Text style={styles.emptySubtitle}>
                 or choose an image from your gallery
               </Text>
@@ -246,7 +246,7 @@ export const CheckWireScreen: React.FC = () => {
               {/* Action controls */}
               <View style={styles.previewActionGroup}>
                 <Button
-                  title="Analyze Wire"
+                  title="Analyze Specimen"
                   variant="primary"
                   size="lg"
                   fullWidth
@@ -280,7 +280,7 @@ export const CheckWireScreen: React.FC = () => {
           </View>
 
           <View style={styles.presetList}>
-            {SAMPLE_WIRES.map((preset) => {
+            {SAMPLE_SPECIMENS.map((preset) => {
               const isSelected = selectedImage === preset.uri;
               return (
                 <TouchableOpacity

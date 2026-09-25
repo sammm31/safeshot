@@ -4,12 +4,12 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '../../theme/colors';
 import { borderRadius, spacing } from '../../theme/spacing';
 import { typography } from '../../theme/typography';
-import { WireInspectionResult } from '../../types/inspection';
+import { InspectionResult, WireInspectionResult } from '../../types/inspection';
 import { formatDateTime, getStatusTheme } from '../../utils/formatters';
 import { Badge } from '../common/Badge';
 
 export interface ResultStatusCardProps {
-  inspection: WireInspectionResult;
+  inspection: InspectionResult;
 }
 
 export const ResultStatusCard: React.FC<ResultStatusCardProps> = ({ inspection }) => {
@@ -69,7 +69,7 @@ export const ResultStatusCard: React.FC<ResultStatusCardProps> = ({ inspection }
           <View style={styles.diagnosticRow}>
             <View style={styles.diagnosticItem}>
               <Text style={styles.diagLabel}>Specimen Geometry</Text>
-              <Text style={styles.diagValue}>{details.wireType}</Text>
+              <Text style={styles.diagValue}>{details.specimenType || details.wireType}</Text>
             </View>
           </View>
 

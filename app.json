@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "WireCheck",
-    "slug": "WireCheck",
+    "name": "Safe Shot",
+    "slug": "safeshot",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,7 +10,7 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "com.wirecheck.app",
+      "package": "com.safeshot.app",
       "adaptiveIcon": {
         "backgroundColor": "#0B132B",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -32,13 +32,13 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow WireCheck to access your camera to inspect wires and electrical components."
+          "cameraPermission": "Allow Safe Shot to access your camera to capture inspection images."
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "Allow WireCheck to access your photos to select wire inspection images."
+          "photosPermission": "Allow Safe Shot to access your photos to select inspection images."
         }
       ]
     ]

@@ -1,4 +1,4 @@
-import { WireStatus } from '../types/inspection';
+import { InspectionStatus, WireStatus } from '../types/inspection';
 import { colors } from '../theme/colors';
 
 export function formatDate(isoString: string): string {
@@ -36,7 +36,7 @@ export function formatDateTime(isoString: string): string {
   return time ? `${date} • ${time}` : date;
 }
 
-export function getStatusTheme(status: WireStatus) {
+export function getStatusTheme(status: InspectionStatus) {
   switch (status) {
     case 'SAFE':
       return {
@@ -47,7 +47,7 @@ export function getStatusTheme(status: WireStatus) {
         glowColor: colors.statusSafeGlow,
         icon: 'checkmark-circle' as const,
         featherIcon: 'check-circle' as const,
-        description: 'Wire appears safe based on the current inspection.',
+        description: 'Specimen appears safe based on the current inspection.',
       };
     case 'BORDERLINE':
       return {
@@ -69,7 +69,7 @@ export function getStatusTheme(status: WireStatus) {
         glowColor: colors.statusDamagedGlow,
         icon: 'alert-circle' as const,
         featherIcon: 'alert-octagon' as const,
-        description: 'Visible indicators suggest the wire may require attention.',
+        description: 'Visible indicators suggest the specimen may require attention.',
       };
   }
 }

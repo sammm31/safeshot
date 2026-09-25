@@ -21,14 +21,14 @@ import { Header } from '../components/common/Header';
 import { Button } from '../components/common/Button';
 import { InspectionCard } from '../components/wire/InspectionCard';
 import { historyStore, useHistory } from '../services/historyStore';
-import { WireStatus } from '../types/inspection';
+import { InspectionStatus, WireStatus } from '../types/inspection';
 
 type HistoryScreenNavigationProp = CompositeNavigationProp<
   BottomTabNavigationProp<MainTabParamList, 'HistoryTab'>,
   NativeStackNavigationProp<RootStackParamList>
 >;
 
-type FilterType = 'ALL' | WireStatus;
+type FilterType = 'ALL' | InspectionStatus;
 
 export const HistoryScreen: React.FC = () => {
   const navigation = useNavigation<HistoryScreenNavigationProp>();
@@ -133,12 +133,12 @@ export const HistoryScreen: React.FC = () => {
             </View>
             <Text style={styles.emptyTitle}>Your inspections will appear here.</Text>
             <Text style={styles.emptyDescription}>
-              Scan a wire or choose an image to generate detailed computer-vision diagnostic reports.
+              Capture a specimen or choose an image to generate detailed computer-vision diagnostic reports.
             </Text>
 
             <View style={styles.emptyActionRow}>
               <Button
-                title="Inspect a Wire"
+                title="Inspect a Specimen"
                 variant="primary"
                 size="md"
                 icon={<Ionicons name="camera-outline" size={18} color={colors.textInverse} />}

@@ -1,5 +1,5 @@
 import { NavigatorScreenParams } from '@react-navigation/native';
-import { WireInspectionResult } from '../types/inspection';
+import { InspectionResult, WireInspectionResult } from '../types/inspection';
 
 export type MainTabParamList = {
   HomeTab: undefined;
@@ -9,6 +9,6 @@ export type MainTabParamList = {
 
 export type RootStackParamList = {
   MainTabs: NavigatorScreenParams<MainTabParamList> | undefined;
-  Result: { inspection: WireInspectionResult };
+  Result: { inspection: InspectionResult };
   About: undefined;
 };
