@@ -42,12 +42,12 @@ export const AboutScreen: React.FC = () => {
             </View>
             <View>
               <Text style={styles.heroTitle}>Safe Shot</Text>
-              <Text style={styles.heroSub}>Intelligent Visual Safety Verification</Text>
+              <Text style={styles.heroSub}>Smart Vial Safety Inspection</Text>
             </View>
           </View>
 
           <Text style={styles.heroLeadText}>
-            Safe Shot is a mobile inspection application designed to assist with safety-condition checking using image analysis.
+            Safe Shot is a mobile healthcare inspection tool designed for Vaccine Vial Monitor (VVM) validation and cold-chain compliance.
           </Text>
         </Card>
 
@@ -139,11 +139,11 @@ export const AboutScreen: React.FC = () => {
             <View style={styles.divider} />
 
             <View style={styles.guidelineRow}>
-              <Ionicons name="alert-circle-outline" size={18} color={colors.statusDamaged} />
+              <Ionicons name="close-circle-outline" size={18} color={colors.statusDiscard} />
               <View style={styles.guidelineContent}>
-                <Text style={styles.guidelineTitle}>DAMAGED / UNSAFE Condition</Text>
+                <Text style={styles.guidelineTitle}>DISCARD / HEAT-EXPOSED Condition</Text>
                 <Text style={styles.guidelineDesc}>
-                  Inner square is the SAME or DARKER than the outer circle (inverted contrast or deficit).
+                  Inner square is the SAME or DARKER than the outer circle. Exceeded cumulative heat exposure limit (DO NOT ADMINISTER).
                 </Text>
               </View>
             </View>
@@ -156,7 +156,7 @@ export const AboutScreen: React.FC = () => {
 
           <Card variant="elevated" padding="lg" style={styles.infoCard}>
             <Text style={styles.projectText}>
-              Safe Shot is an engineering prototype created for safety auditors, quality inspectors, and verification teams.
+              Safe Shot is an engineering prototype created for vaccine cold-chain auditors, immunisation teams, and healthcare professionals.
             </Text>
 
             <View style={styles.techStackContainer}>
@@ -168,7 +168,7 @@ export const AboutScreen: React.FC = () => {
                 <Ionicons name="arrow-down" size={14} color={colors.accent} />
                 <Text style={styles.pipelineNode}>Computer Vision ML Model (YOLOv8 / ResNet)</Text>
                 <Ionicons name="arrow-down" size={14} color={colors.accent} />
-                <Text style={styles.pipelineNode}>Real-time Diagnostic Report (SAFE / BORDERLINE / DAMAGED)</Text>
+                <Text style={styles.pipelineNode}>Real-time Diagnostic Report (SAFE / BORDERLINE / DISCARD)</Text>
               </View>
             </View>
 

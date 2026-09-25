@@ -1,6 +1,14 @@
-export type InspectionStatus = 'SAFE' | 'BORDERLINE' | 'DAMAGED';
+export type InspectionStatus = 'SAFE' | 'BORDERLINE' | 'DISCARD' | 'DAMAGED';
 // Alias for backwards compatibility
 export type WireStatus = InspectionStatus;
+
+export interface VialBatchInfo {
+  batchNumber: string;
+  vaccineName: string;
+  expiryDate: string;
+  manufacturer?: string;
+  storageTemp?: string;
+}
 
 export interface InspectionDetails {
   specimenType: string;
@@ -20,6 +28,8 @@ export interface InspectionResult {
   timestamp: string;
   details: InspectionDetails;
   isDemo?: boolean;
+  vialBatch?: VialBatchInfo;
+  isSaved?: boolean;
 }
 
 // Alias for backwards compatibility

@@ -44,10 +44,20 @@ export const colors = {
   statusBorderlineBorder: '#FDE68A',
   statusBorderlineGlow: 'rgba(245, 158, 11, 0.15)',
 
+  statusDiscard: '#DC2626',
+  statusDiscardBg: '#FEF2F2',
+  statusDiscardBorder: '#FECACA',
+  statusDiscardGlow: 'rgba(239, 68, 68, 0.15)',
+
   statusDamaged: '#DC2626',
   statusDamagedBg: '#FEF2F2',
   statusDamagedBorder: '#FECACA',
   statusDamagedGlow: 'rgba(239, 68, 68, 0.15)',
+
+  // Healthcare Teals
+  tealPrimary: '#0D9488',
+  tealLight: '#CCFBF1',
+  tealSurface: '#F0FDFA',
 
   // Overlays
   overlayDark: 'rgba(11, 19, 43, 0.75)',

@@ -30,7 +30,7 @@ export const Badge: React.FC<BadgeProps> = ({
   let borderColor = colors.border;
   let defaultLabel = label;
 
-  if (type === 'SAFE' || type === 'BORDERLINE' || type === 'DAMAGED') {
+  if (type === 'SAFE' || type === 'BORDERLINE' || type === 'DAMAGED' || type === 'DISCARD') {
     const theme = getStatusTheme(type);
     bgColor = theme.bgColor;
     textColor = theme.color;

@@ -23,7 +23,7 @@ export const InspectionCard: React.FC<InspectionCardProps> = ({
   inspection,
   onPress,
 }) => {
-  const { status, confidence, timestamp, imageUri, details } = inspection;
+  const { status, confidence, timestamp, imageUri, details, vialBatch } = inspection;
   const statusTheme = getStatusTheme(status);
 
   return (
@@ -42,7 +42,7 @@ export const InspectionCard: React.FC<InspectionCardProps> = ({
           />
         ) : (
           <View style={styles.thumbnailFallback}>
-            <Ionicons name="hardware-chip-outline" size={24} color={colors.accent} />
+            <Ionicons name="medkit-outline" size={24} color={colors.accent} />
           </View>
         )}
       </View>
@@ -57,10 +57,15 @@ export const InspectionCard: React.FC<InspectionCardProps> = ({
         </View>
 
         <Text style={styles.specimenTypeText} numberOfLines={1}>
-          {details.specimenType || details.wireType || 'Inspection Specimen'}
+          {vialBatch ? vialBatch.vaccineName : (details.specimenType || 'Vial Inspection')}
         </Text>
 
         <View style={styles.metaRow}>
+          {vialBatch && (
+            <View style={styles.batchTag}>
+              <Text style={styles.batchText}>{vialBatch.batchNumber}</Text>
+            </View>
+          )}
           <Ionicons name="time-outline" size={13} color={colors.textMuted} />
           <Text style={styles.timestampText}>{formatDateTime(timestamp)}</Text>
         </View>
@@ -142,6 +147,21 @@ const styles = StyleSheet.create({
     color: colors.textMuted,
     marginLeft: 4,
     fontSize: 11,
+  },
+  batchTag: {
+    backgroundColor: colors.surfaceSubtle,
+    borderRadius: borderRadius.xs,
+    paddingHorizontal: 5,
+    paddingVertical: 1,
+    marginRight: 6,
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  batchText: {
+    ...typography.mono,
+    fontSize: 10,
+    fontWeight: '700',
+    color: colors.navyPrimary,
   },
   arrowContainer: {
     paddingLeft: spacing.xs,

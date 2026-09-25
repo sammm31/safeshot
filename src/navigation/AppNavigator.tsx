@@ -6,15 +6,21 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Ionicons } from '@expo/vector-icons';
 
 import { colors } from '../theme/colors';
-import { borderRadius, spacing } from '../theme/spacing';
+import { borderRadius } from '../theme/spacing';
 import { shadows } from '../theme/shadows';
 import { MainTabParamList, RootStackParamList } from './types';
+import { useAuth } from '../services/authStore';
 
 // Screens
+import { LoginScreen } from '../screens/LoginScreen';
 import { HomeScreen } from '../screens/HomeScreen';
-import { CheckWireScreen } from '../screens/CheckWireScreen';
-import { HistoryScreen } from '../screens/HistoryScreen';
+import { VialCheckScreen } from '../screens/VialCheckScreen';
+import { RecordsScreen } from '../screens/RecordsScreen';
+import { MoreScreen } from '../screens/MoreScreen';
 import { ResultScreen } from '../screens/ResultScreen';
+import { InventoryScreen } from '../screens/InventoryScreen';
+import { ProfileScreen } from '../screens/ProfileScreen';
+import { SettingsScreen } from '../screens/SettingsScreen';
 import { AboutScreen } from '../screens/AboutScreen';
 
 const Tab = createBottomTabNavigator<MainTabParamList>();
@@ -33,6 +39,7 @@ function MainTabNavigator() {
         tabBarItemStyle: styles.tabBarItem,
       }}
     >
+      {/* 1. Home Dashboard */}
       <Tab.Screen
         name="HomeTab"
         component={HomeScreen}
@@ -48,11 +55,12 @@ function MainTabNavigator() {
         }}
       />
 
+      {/* 2. Vial Check (Primary Center Action) */}
       <Tab.Screen
-        name="CheckWireTab"
-        component={CheckWireScreen}
+        name="VialCheckTab"
+        component={VialCheckScreen}
         options={{
-          tabBarLabel: 'Inspect',
+          tabBarLabel: 'Vial Check',
           tabBarIcon: ({ color, focused }) => (
             <View style={styles.centerIconWrapper}>
               <View
@@ -62,8 +70,8 @@ function MainTabNavigator() {
                 ]}
               >
                 <Ionicons
-                  name={focused ? 'scan' : 'scan-outline'}
-                  size={20}
+                  name={focused ? 'scan-circle' : 'scan-circle-outline'}
+                  size={24}
                   color={focused ? colors.textInverse : colors.navyPrimary}
                 />
               </View>
@@ -72,15 +80,32 @@ function MainTabNavigator() {
         }}
       />
 
+      {/* 3. Records */}
       <Tab.Screen
-        name="HistoryTab"
-        component={HistoryScreen}
+        name="RecordsTab"
+        component={RecordsScreen}
         options={{
-          tabBarLabel: 'History',
+          tabBarLabel: 'Records',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
-              name={focused ? 'time' : 'time-outline'}
+              name={focused ? 'document-text' : 'document-text-outline'}
               size={22}
+              color={color}
+            />
+          ),
+        }}
+      />
+
+      {/* 4. More Options */}
+      <Tab.Screen
+        name="MoreTab"
+        component={MoreScreen}
+        options={{
+          tabBarLabel: 'More',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? 'grid' : 'grid-outline'}
+              size={21}
               color={color}
             />
           ),
@@ -91,31 +116,67 @@ function MainTabNavigator() {
 }
 
 export function AppNavigator() {
+  const { isAuthenticated } = useAuth();
+
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MainTabs"
         screenOptions={{
           headerShown: false,
           animation: 'slide_from_right',
           contentStyle: { backgroundColor: colors.background },
         }}
       >
-        <Stack.Screen name="MainTabs" component={MainTabNavigator} />
-        <Stack.Screen
-          name="Result"
-          component={ResultScreen}
-          options={{
-            animation: 'fade_from_bottom',
-          }}
-        />
-        <Stack.Screen
-          name="About"
-          component={AboutScreen}
-          options={{
-            animation: 'slide_from_right',
-          }}
-        />
+        {!isAuthenticated ? (
+          /* Authentication Gate */
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{
+              animation: 'fade',
+            }}
+          />
+        ) : (
+          /* Main Authenticated Application Stack */
+          <>
+            <Stack.Screen name="MainTabs" component={MainTabNavigator} />
+            <Stack.Screen
+              name="Result"
+              component={ResultScreen}
+              options={{
+                animation: 'fade_from_bottom',
+              }}
+            />
+            <Stack.Screen
+              name="Inventory"
+              component={InventoryScreen}
+              options={{
+                animation: 'slide_from_right',
+              }}
+            />
+            <Stack.Screen
+              name="Profile"
+              component={ProfileScreen}
+              options={{
+                animation: 'slide_from_right',
+              }}
+            />
+            <Stack.Screen
+              name="Settings"
+              component={SettingsScreen}
+              options={{
+                animation: 'slide_from_right',
+              }}
+            />
+            <Stack.Screen
+              name="About"
+              component={AboutScreen}
+              options={{
+                animation: 'slide_from_right',
+              }}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -147,9 +208,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   centerIconBadge: {
-    width: 38,
-    height: 38,
-    borderRadius: 19,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: colors.surfaceSubtle,
     alignItems: 'center',
     justifyContent: 'center',
@@ -162,7 +223,7 @@ const styles = StyleSheet.create({
     elevation: 4,
     shadowColor: colors.accent,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
+    shadowOpacity: 0.35,
+    shadowRadius: 5,
   },
 });
