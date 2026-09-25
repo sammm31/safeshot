@@ -303,7 +303,7 @@ const styles = StyleSheet.create({
   listContent: {
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.xs,
-    paddingBottom: spacing.xxxl,
+    paddingBottom: 130,
     flexGrow: 1,
   },
   emptyContainer: {

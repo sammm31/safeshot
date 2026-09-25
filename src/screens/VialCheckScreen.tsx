@@ -448,7 +448,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.xxxl,
+    paddingBottom: 130,
   },
   permissionBanner: {
     flexDirection: 'row',

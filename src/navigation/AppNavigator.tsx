@@ -3,6 +3,7 @@ import { Platform, StyleSheet, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
 import { colors } from '../theme/colors';
@@ -27,14 +28,32 @@ const Tab = createBottomTabNavigator<MainTabParamList>();
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function MainTabNavigator() {
+  const insets = useSafeAreaInsets();
+  // Safe bottom padding: Android 3-button nav bar is typically 48dp.
+  // Ensure at least 28dp so Android system keys (Recent, Home, Back) never block tabs.
+  const bottomInset = Math.max(insets.bottom, Platform.OS === 'android' ? 28 : 12);
+  const tabBarHeight = 56 + bottomInset;
+
   return (
     <Tab.Navigator
       initialRouteName="HomeTab"
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: colors.accent,
-        tabBarInactiveTintColor: colors.textMuted,
-        tabBarStyle: styles.tabBar,
+        tabBarInactiveTintColor: '#475569',
+        tabBarStyle: {
+          backgroundColor: '#FFFFFF',
+          borderTopWidth: 1,
+          borderTopColor: colors.border,
+          height: tabBarHeight,
+          paddingBottom: bottomInset,
+          paddingTop: 6,
+          elevation: 16,
+          shadowColor: '#000',
+          shadowOffset: { width: 0, height: -3 },
+          shadowOpacity: 0.1,
+          shadowRadius: 6,
+        },
         tabBarLabelStyle: styles.tabBarLabel,
         tabBarItemStyle: styles.tabBarItem,
       }}
@@ -183,47 +202,39 @@ export function AppNavigator() {
 }
 
 const styles = StyleSheet.create({
-  tabBar: {
-    backgroundColor: colors.surface,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
-    height: Platform.OS === 'ios' ? 88 : 68,
-    paddingBottom: Platform.OS === 'ios' ? 28 : 10,
-    paddingTop: 8,
-    elevation: 8,
-    ...shadows.floating,
-  },
   tabBarLabel: {
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: '700',
     marginTop: 2,
     letterSpacing: 0.2,
   },
   tabBarItem: {
+    height: 48,
     alignItems: 'center',
     justifyContent: 'center',
   },
   centerIconWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: -4,
   },
   centerIconBadge: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.surfaceSubtle,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: '#F1F5F9',
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1.5,
-    borderColor: colors.borderStrong,
+    borderWidth: 2,
+    borderColor: '#CBD5E1',
   },
   centerIconBadgeActive: {
     backgroundColor: colors.accent,
     borderColor: colors.accent,
-    elevation: 4,
+    elevation: 6,
     shadowColor: colors.accent,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.35,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.4,
     shadowRadius: 5,
   },
 });

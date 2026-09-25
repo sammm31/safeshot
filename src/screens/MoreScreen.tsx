@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.xs,
-    paddingBottom: spacing.xxxl,
+    paddingBottom: 130,
   },
   userCard: {
     flexDirection: 'row',
