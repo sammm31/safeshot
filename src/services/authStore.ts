@@ -18,8 +18,8 @@ const DEFAULT_USER: UserProfile = {
 type AuthListener = () => void;
 
 class AuthStore {
-  private user: UserProfile | null = DEFAULT_USER;
-  private authenticated: boolean = true; // logged in by default for rapid testing, can toggle
+  private user: UserProfile | null = null;
+  private authenticated: boolean = false; // start on Login screen
   private listeners: Set<AuthListener> = new Set();
 
   public getUser(): UserProfile | null {
